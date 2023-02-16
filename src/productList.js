@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './productList.css';
+import './CSS/productList.css';
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,7 +18,7 @@ function ProductList() {
   // recieves products from database
   const getFormData = () => {
     axios.get('http://localhost/react_ScandiProject/src/PHP/index.php').then(function(res) {
-    console.log(res.data)
+    // console.log(res.data)
     setForm(res.data)
   })
   }
@@ -30,12 +30,6 @@ function ProductList() {
       setisChecked([...isChecked, productSku]);
     }
   };
-
-  // const handleCheckbox = (productSku) => {
-  //   setisChecked({ ...isChecked, [productSku]: !isChecked[productSku] });
-  // };
-
-console.log(isChecked)
 
   // page routing
   const navigate = useNavigate() 
@@ -49,10 +43,9 @@ console.log(isChecked)
 
     <form onSubmit={(e) => {
       e.preventDefault()
-
+      // sends selected products to PHP page for deletion
       axios.post('http://localhost/react_ScandiProject/src/PHP/delete.php', { productSku: isChecked })
       .then(response => {
-        // Handle successful deletion
         console.log(response.data);
         getFormData()
       })
@@ -71,7 +64,6 @@ console.log(isChecked)
           type="submit"
           name="please_delete"
           className="btn btn-primary btn-sm"
-          // disabled={selectedProducts.length === 0}
           >MASS DELETE
         </button>
       </div>
@@ -80,7 +72,7 @@ console.log(isChecked)
       <div className="form-container">
         {form.map((value, index) =>
         <div key={index} className="card-box-order-mine">
-        <input className="delete-checkbox" type="checkbox" name="delete[]"
+        <input className="delete-checkbox" type="checkbox"
         value={value.sku}
         checked={isChecked.value}
         onChange={() => handleCheckbox(value.sku)}
