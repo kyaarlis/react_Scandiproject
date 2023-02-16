@@ -9,6 +9,8 @@ export default function ProductPage() {
   
   const [formData, setFormData] = useState({})
 
+  // const [required, setRequired] = useState(false)
+
     const options = [
       {
         value: "DVD",
@@ -30,6 +32,11 @@ export default function ProductPage() {
       const value = event.target.value
       setFormData(values => ({...values, [name]: value}))
     }
+
+    // function handleRequired(event) {
+    //   const value = event.target.value;
+    //   setRequired(value === options[0].value || value === options[1].value  || value === options[2].value );
+    // }
 
   // page routing
   const navigate = useNavigate()
@@ -59,8 +66,9 @@ export default function ProductPage() {
                   <header className="header">
                     <h2 className="heading">Product Add</h2>
                     <div className="product__buttons">
-                      <button type="submit" id="save-product-button" className="save__product" style={{display: 'inline'}}>Save</button>
-                      <button className="cancel__button" onClick={handleClick}>Cancel</button> 
+                      <button type="submit" id="save-product-button" className="btn btn-primary btn-sm">Save</button> 
+
+                      <button type="button" className="btn btn-primary btn-sm" onClick={handleClick}>Cancel</button>
                     </div>
                   </header>
                   <hr size="2,5" width="95%" color="black" className="header__line" />
@@ -94,8 +102,8 @@ export default function ProductPage() {
                     <div className="dvd_content" id="dvd_content" style={{display: selectOption[0]?.value === "DVD" ? 'block' : 'none'}}>
                       <div className="dvd" id="DVD">
                         <label htmlFor="size">Size (MB)</label>
-                        <input type="number" min={0} id="size" name="size"  
-                        // value={formData.size}
+                        <input type="number" min={0} id="size" name="size"
+                        required={selectOption[0]?.value === "DVD" ? true : false}
                         onChange={handleChange}
                           />
                       </div>
@@ -105,16 +113,18 @@ export default function ProductPage() {
                       <div className="furniture" id="Furniture">
                         <label htmlFor="height">Height (CM)</label>
                         <input type="number" min={0} id="height" name="height" 
-                        // value={formData.height}
+                        required={selectOption[0]?.value === "Furniture" ? true : false}
                         onChange={handleChange}
                          />
                         <label htmlFor="width">Width (CM)</label>
                         <input type="number" min={0} id="width" name="width" 
+                        required={selectOption[0]?.value === "Furniture" ? true : false}
                         onChange={handleChange}
                          />
                         <label htmlFor="length">Length (CM)</label>
                         <input type="number" min={0} id="length" name="length" 
-                       onChange={handleChange}
+                        required={selectOption[0]?.value === "Furniture" ? true : false}
+                        onChange={handleChange}
                          />
                       </div>
                       <p className="furniture_descr">Please provide dimensions in HxWxL format</p>
@@ -123,7 +133,7 @@ export default function ProductPage() {
                       <div className="book" id="Book">
                         <label htmlFor="weight">Weight (KG)</label>
                         <input type="number" min={0} id="weight" name="weight"
-                        // value={formData.book}
+                        required={selectOption[0]?.value === "Book" ? true : false}
                         onChange={handleChange}
                          />
                       </div>

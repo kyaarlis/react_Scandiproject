@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './CSS/productList.css';
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function ProductList() {
   // holds products for display
@@ -39,7 +39,7 @@ function ProductList() {
 
     return (
         <>
-  <div className="margin-for-page" id="pageContent">
+  <div className="page-content" id="pageContent">
 
     <form onSubmit={(e) => {
       e.preventDefault()
@@ -54,20 +54,22 @@ function ProductList() {
         console.error(error);
       });
     }}>
-      {/* add and delete buttons  */}
-      <h2 className="heading">Product List</h2>
-      <div className="product__buttons">
-        <button type="button" className="btn btn-primary btn-sm add_product" onClick={handleClick}> ADD</button>
+    <div className="header">
+        {/* add and delete buttons  */}
+        <h2 className="heading">Product List</h2>
+        <div className="product__buttons">
+          <button type="button" className="btn btn-primary btn-sm" onClick={handleClick}>ADD</button>
 
-        <button
-          id="delete-product-btn"
-          type="submit"
-          name="please_delete"
-          className="btn btn-primary btn-sm"
-          >MASS DELETE
-        </button>
+          <button
+            id="delete-product-btn"
+            type="submit"
+            name="please_delete"
+            className="btn btn-primary btn-sm"
+            >MASS DELETE
+          </button>
+        </div>
+        <hr className="border border-dark my-4"></hr>
       </div>
-      <hr size="2,5" width="95%" color="black" className="header__line" />
 
       <div className="form-container">
         {form.map((value, index) =>
