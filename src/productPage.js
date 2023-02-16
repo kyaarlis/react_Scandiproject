@@ -7,17 +7,7 @@ import axios from 'axios';
 export default function ProductPage() {
   const [selectOption, setSelectOption] = useState([])
   
-  const [formData, setFormData] = useState({ 
-    // sku: "", 
-    // name: "",
-    // price: '', 
-    // productType: "",
-    // size: "",
-    // height: "", 
-    // width: "", 
-    // length: "", 
-    // weight: "", 
-  })
+  const [formData, setFormData] = useState({})
 
     const options = [
       {

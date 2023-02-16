@@ -4,11 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *"); 
-header("Access-Control-Allow-Methods: DELETE");;
-?>
-
-<?php
-//  Parses data from the form to put into the products database
+header("Access-Control-Allow-Methods: *");
 
 // Connect to the file dbConnect.php
 require "database/dbConnect.php";
@@ -16,7 +12,7 @@ $objDB = new dbConnect;
 $conn = $objDB->connect();
 
 $method = $_SERVER['REQUEST_METHOD'];
-switch($method) {
+switch ($method) {
     case "GET":
         $sql = "SELECT * FROM products";
         $stmt = $conn->prepare($sql);
@@ -26,14 +22,13 @@ switch($method) {
         break; 
 
     case 'POST':
-        $form = json_decode( file_get_contents('php://input') );
-        $sql = "INSERT INTO products(sku, name, price, size, height, width, length, weight) 
-        VALUES(:sku, :name, :price, :size, :height, :width, :length, :weight)";
+        $form = json_decode(file_get_contents('php://input'));
+        $sql = "INSERT INTO products (sku, name, price, size, height, width, length, weight) 
+                VALUES (:sku, :name, :price, :size, :height, :width, :length, :weight)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':sku', $form->sku);
         $stmt->bindParam(':name', $form->name);
         $stmt->bindParam(':price', $form->price);
-        
         $stmt->bindParam(':size', $form->size);
         $stmt->bindParam(':height', $form->height);
         $stmt->bindParam(':width', $form->width);
@@ -42,25 +37,12 @@ switch($method) {
         if ($stmt->execute()) {
             $response = ['status' => 1, 'message' => 'Record saved successfully!'];
         } else {
-            $response = ['status' => 0, 'message' => 'Failed to creaet record:('];
-        }
-        break;
-
-    case 'DELETE':
-        $sql = "DELETE FROM products WHERE sku = :sku";
-        $path = explode('/', $_SERVER['REQUEST_URI']);
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':sku', $path[3]);
-
-        if ($stmt->execute()) {
-            $response = ['status' => 1, 'message' => 'Record deleted successfully!'];
-        } else {
-            $response = ['status' => 0, 'message' => 'Failed to delete record:('];
+            $response = ['status' => 0, 'message' => 'Failed to create record:('];
         }
         echo json_encode($response);
         break;
 }
+
 
 
 

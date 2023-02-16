@@ -23,31 +23,19 @@ function ProductList() {
   })
   }
 
-  const handlecheckbox = (e)=>{
-    const {value, checked}= e.target;
-    console.log(value);
-    if(checked)
-    {
-      setisChecked([...isChecked, Number(value)]);
-    } else{
-      setisChecked(isChecked.filter( (e)=>e!== Number(value)));
+  const handleCheckbox = (productSku) => {
+    if (isChecked.includes(productSku)) {
+      setisChecked(isChecked.filter(sku => sku !== productSku));
+    } else {
+      setisChecked([...isChecked, productSku]);
     }
-}
+  };
 
+  // const handleCheckbox = (productSku) => {
+  //   setisChecked({ ...isChecked, [productSku]: !isChecked[productSku] });
+  // };
 
-  // sends products to backend to get deleted
-  const deleteProducts = (event) => {
-    event.preventDefault();
-    
-    axios.delete('http://localhost/react_ScandiProject/src/PHP/index.php', {
-      data: isChecked
-    }).then(response => {
-      if (response.ok) {
-        setForm(form => form.filter(product => !isChecked.includes(product.sku)));
-        setisChecked([]);
-      }
-    });
-  }
+console.log(isChecked)
 
   // page routing
   const navigate = useNavigate() 
@@ -58,7 +46,21 @@ function ProductList() {
     return (
         <>
   <div className="margin-for-page" id="pageContent">
-    <form method="post" action="">
+
+    <form onSubmit={(e) => {
+      e.preventDefault()
+
+      axios.post('http://localhost/react_ScandiProject/src/PHP/delete.php', { productSku: isChecked })
+      .then(response => {
+        // Handle successful deletion
+        console.log(response.data);
+        getFormData()
+      })
+      .catch(error => {
+        // Handle error
+        console.error(error);
+      });
+    }}>
       {/* add and delete buttons  */}
       <h2 className="heading">Product List</h2>
       <div className="product__buttons">
@@ -70,7 +72,6 @@ function ProductList() {
           name="please_delete"
           className="btn btn-primary btn-sm"
           // disabled={selectedProducts.length === 0}
-          onClick={() => deleteProducts()}
           >MASS DELETE
         </button>
       </div>
@@ -81,8 +82,9 @@ function ProductList() {
         <div key={index} className="card-box-order-mine">
         <input className="delete-checkbox" type="checkbox" name="delete[]"
         value={value.sku}
-        checked={ value.isChecked}
-          onChange={(e)=>handlecheckbox(e)}/>
+        checked={isChecked.value}
+        onChange={() => handleCheckbox(value.sku)}
+        />
           {/* logic for differencing product types */}
             <div className="card-box-values">
                 <p>{value.sku}</p>
