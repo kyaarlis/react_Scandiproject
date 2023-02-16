@@ -9,8 +9,6 @@ export default function ProductPage() {
   
   const [formData, setFormData] = useState({})
 
-  // const [required, setRequired] = useState(false)
-
     const options = [
       {
         value: "DVD",
@@ -33,11 +31,6 @@ export default function ProductPage() {
       setFormData(values => ({...values, [name]: value}))
     }
 
-    // function handleRequired(event) {
-    //   const value = event.target.value;
-    //   setRequired(value === options[0].value || value === options[1].value  || value === options[2].value );
-    // }
-
   // page routing
   const navigate = useNavigate()
 
@@ -48,12 +41,26 @@ export default function ProductPage() {
   // sends form data to PHP to insert into DB
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    axios.post('http://localhost/react_ScandiProject/src/PHP/index.php', formData).then(function(res){
-      console.log(res.data)
-      // routes the user to added product page after form is submitted
-      handleClick()
-    })
+  
+    // fetches all sku values from the database
+    axios.get('http://localhost/react_ScandiProject/src/PHP/index.php')
+      .then(function (response) {
+        // checks if the sku value from the form is already present in the database
+        if (response.data.some(item => item.sku === formData.sku)) {
+          alert('SKU value already exists in the database. Please enter a different SKU value.');
+        } else {
+          // sends form data to PHP to insert into DB
+          axios.post('http://localhost/react_ScandiProject/src/PHP/index.php', formData)
+            .then(function (res) {
+              console.log(res.data);
+              // routes the user to added product page after form is submitted
+              handleClick();
+            });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
         return (
@@ -70,26 +77,48 @@ export default function ProductPage() {
 
                       <button type="button" className="btn btn-primary btn-sm" onClick={handleClick}>Cancel</button>
                     </div>
+                    <hr className="border border-dark my-4"></hr>
                   </header>
-                  <hr size="2,5" width="95%" color="black" className="header__line" />
                   
-                    <label htmlFor="sku" className="sku">SKU</label>
-                    <input type="text" id="sku" className="sku" name="sku"
-                    onChange={handleChange}
-                    required />
-                    <br /><br />
-                    <label htmlFor="name" className="name">Name</label>
-                    <input type="text" id="name" className="name" name="name" 
-                    onChange={handleChange}
-                    required />
-                    <br /><br />
-                    <label htmlFor="price">Price ($)</label>
-                    <input type="number" min={0} id="price" name="price"
-                    onChange={handleChange}
-                     required />
-                    <div className="product_switcher" id="product_switcher">
-                      <span className="product_switcher-title">Type Switcher</span>  
+                  <div className='form-container'>
 
+                    <div className="mb-3 row g-1 align-items-center">
+                      <div className="col-auto">
+                        <label htmlFor="sku" className="col-form-label sku">SKU</label>
+                      </div>
+                      <div className="col-auto">
+                        <input type="text" id="sku" className="form-control sku" name="sku" 
+                        onChange={handleChange}
+                        required />
+                      </div>
+                    </div>
+
+
+                    <div className="mb-3 row g-1 align-items-center">
+                      <div className="col-auto">
+                        <label htmlFor="name" className="name">Name</label>
+                      </div>
+                      <div className="col-auto">
+                        <input type="text" id="name" className="form-control name" name="name" 
+                        onChange={handleChange}
+                        required />
+                      </div>
+                    </div>
+
+
+                    <div className="mb-3 row g-1 align-items-center">
+                      <div className="col-auto">
+                        <label htmlFor="price" className="col-form-label sku">Price</label>
+                      </div>
+                      <div className="col-auto">
+                        <input type="number" id="price" min={0} className="form-control price" name="price" 
+                        onChange={handleChange}
+                        required />
+                      </div>
+                    </div>
+            
+                    <div className="product_switcher" id="product_switcher">
+                      <span className="product_switcher-title">Type Switcher</span> 
                     {/* Allows the user to select desired product type */}
                       <Select name="productType" id="productType"
                       options={options} 
@@ -97,7 +126,7 @@ export default function ProductPage() {
                       onChange={(selected) => 
                         setSelectOption(selected)
                       }
-                     />
+                      required/>
                     </div>
                     <div className="dvd_content" id="dvd_content" style={{display: selectOption[0]?.value === "DVD" ? 'block' : 'none'}}>
                       <div className="dvd" id="DVD">
@@ -139,13 +168,14 @@ export default function ProductPage() {
                       </div>
                       <p className="book_descr">Please specify Book's weight in kg</p>
                     </div>
+                  </div>
                   </form>
-                    <div className="d-flex flex-row bd-highlight mb-3 flex-wrap">
+                    
                       <footer className="footer">
-                        <hr size="2,5" width="95%" color="black" className="footer__line" />
+                      <hr className="border border-dark my-4"></hr>
                         <p className="footer__p">Scandiweb Test assignment</p>
                       </footer>
-                      </div>
+                      
                 </div>
               )  
             }

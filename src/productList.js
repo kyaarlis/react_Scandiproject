@@ -18,7 +18,7 @@ function ProductList() {
   // recieves products from database
   const getFormData = () => {
     axios.get('http://localhost/react_ScandiProject/src/PHP/index.php').then(function(res) {
-    // console.log(res.data)
+    console.log(res.data)
     setForm(res.data)
   })
   }
@@ -30,7 +30,8 @@ function ProductList() {
       setisChecked([...isChecked, productSku]);
     }
   };
-
+  
+  console.log(isChecked)
   // page routing
   const navigate = useNavigate() 
   function handleClick() {
@@ -48,6 +49,7 @@ function ProductList() {
       .then(response => {
         console.log(response.data);
         getFormData()
+        setisChecked([])
       })
       .catch(error => {
         // Handle error
@@ -64,7 +66,7 @@ function ProductList() {
             id="delete-product-btn"
             type="submit"
             name="please_delete"
-            className="btn btn-primary btn-sm"
+            className="btn btn-danger btn-sm"
             >MASS DELETE
           </button>
         </div>
@@ -76,7 +78,8 @@ function ProductList() {
         <div key={index} className="card-box-order-mine">
         <input className="delete-checkbox" type="checkbox"
         value={value.sku}
-        checked={isChecked.value}
+        checked={isChecked.includes(value.sku)}
+
         onChange={() => handleCheckbox(value.sku)}
         />
           {/* logic for differencing product types */}
@@ -100,7 +103,7 @@ function ProductList() {
         )}
 
         <footer className="footer">
-          <hr size="4,5" width="95%" color="black" className="footer__line" />
+        <hr className="border border-dark my-4"></hr>
           <p className="footer__p">Scandiweb Test assignment</p>
         </footer>
       </div>
