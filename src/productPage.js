@@ -1,6 +1,7 @@
 import './CSS/productPage.css';
 import Select from 'react-dropdown-select';
 import React, { useState } from "react";
+import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +9,7 @@ export default function ProductPage() {
   const [selectOption, setSelectOption] = useState([])
   
   const [formData, setFormData] = useState({})
+  
 
     const options = [
       {
@@ -65,6 +67,9 @@ export default function ProductPage() {
 
         return (
                 <div>
+                  <Helmet>
+                  <title>Add Product</title>
+                </Helmet>
                   <form
                     onSubmit={handleSubmit}
                     id="product_form" 
@@ -72,7 +77,7 @@ export default function ProductPage() {
                     >
                   <header className="header">
                     <h2 className="heading">Product Add</h2>
-                    <div className="product__buttons">
+                    <div className="buttons">
                       <button type="submit" id="save-product-button" className="btn btn-primary btn-sm">Save</button> 
 
                       <button type="button" className="btn btn-primary btn-sm" onClick={handleClick}>Cancel</button>

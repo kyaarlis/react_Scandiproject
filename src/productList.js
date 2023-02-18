@@ -18,7 +18,7 @@ function ProductList() {
   // recieves products from database
   const getFormData = () => {
     axios.get('http://localhost/react_ScandiProject/src/PHP/index.php').then(function(res) {
-    console.log(res.data)
+    // console.log(res.data)
     setForm(res.data)
   })
   }
@@ -31,7 +31,8 @@ function ProductList() {
     }
   };
   
-  console.log(isChecked)
+  // console.log(isChecked)
+  
   // page routing
   const navigate = useNavigate() 
   function handleClick() {
