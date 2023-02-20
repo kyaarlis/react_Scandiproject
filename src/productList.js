@@ -10,6 +10,8 @@ function ProductList() {
 
   // holds checked products that are about to get deleted
   const [isChecked, setisChecked]= useState([]);
+  
+  const deleteUrl = 'https://kyaarlis.github.io/react_ScandiProject/src/PHP/delete.php'
 
   useEffect(() => {
     getFormData()
@@ -46,7 +48,7 @@ function ProductList() {
     <form onSubmit={(e) => {
       e.preventDefault()
       // sends selected products to PHP page for deletion
-      axios.post('http://localhost/react_ScandiProject/src/PHP/delete.php', { productSku: isChecked })
+      axios.post(deleteUrl, { productSku: isChecked })
       .then(response => {
         console.log(response.data);
         getFormData()
