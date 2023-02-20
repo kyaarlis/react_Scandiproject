@@ -1,7 +1,6 @@
 import './CSS/productPage.css';
 import Select from 'react-dropdown-select';
 import React, { useState } from "react";
-import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -9,8 +8,10 @@ export default function ProductPage() {
   const [selectOption, setSelectOption] = useState([])
   
   const [formData, setFormData] = useState({})
-  
 
+  // this is where form data goes for validation and to be insered in DB
+  const dbUrl = 'http://karlis-veckagans.atwebpages.com/PHP/index.php'
+  
     const options = [
       {
         value: "DVD",
@@ -45,14 +46,14 @@ export default function ProductPage() {
     event.preventDefault();
   
     // fetches all sku values from the database
-    axios.get('http://localhost/react_ScandiProject/src/PHP/index.php')
+    axios.get(dbUrl)
       .then(function (response) {
         // checks if the sku value from the form is already present in the database
         if (response.data.some(item => item.sku === formData.sku)) {
           alert('SKU value already exists in the database. Please enter a different SKU value.');
         } else {
           // sends form data to PHP to insert into DB
-          axios.post('http://localhost/react_ScandiProject/src/PHP/index.php', formData)
+          axios.post(dbUrl, formData)
             .then(function (res) {
               console.log(res.data);
               // routes the user to added product page after form is submitted
@@ -64,12 +65,13 @@ export default function ProductPage() {
         console.log(error);
       });
   }
+  
+  // Page title
+  document.title = 'Add Product'
 
         return (
                 <div>
-                  <Helmet>
-                  <title>Add Product</title>
-                </Helmet>
+                  
                   <form
                     onSubmit={handleSubmit}
                     id="product_form" 

@@ -11,13 +11,16 @@ function ProductList() {
   // holds checked products that are about to get deleted
   const [isChecked, setisChecked]= useState([]);
 
+  const dbUrl = 'http://karlis-veckagans.atwebpages.com/PHP/index.php'
+  const deleteUrl = 'http://karlis-veckagans.atwebpages.com/PHP/delete.php'
+
   useEffect(() => {
     getFormData()
   }, [])
 
   // recieves products from database
   const getFormData = () => {
-    axios.get('http://localhost/react_ScandiProject/src/PHP/index.php').then(function(res) {
+    axios.get(dbUrl).then(function(res) {
     // console.log(res.data)
     setForm(res.data)
   })
@@ -36,17 +39,20 @@ function ProductList() {
   // page routing
   const navigate = useNavigate() 
   function handleClick() {
-    navigate("ProductPage")
+    navigate("addproduct")
   }
 
+  // Page title
+  document.title = 'Products'
+
     return (
-        <>
+        <>  
   <div className="page-content" id="pageContent">
 
     <form onSubmit={(e) => {
       e.preventDefault()
       // sends selected products to PHP page for deletion
-      axios.post('http://localhost/react_ScandiProject/src/PHP/delete.php', { productSku: isChecked })
+      axios.post(deleteUrl, { productSku: isChecked })
       .then(response => {
         console.log(response.data);
         getFormData()
@@ -61,7 +67,7 @@ function ProductList() {
         {/* add and delete buttons  */}
         <h2 className="heading">Product List</h2>
         <div className="product__buttons">
-          <button type="button" className="btn btn-primary btn-sm" onClick={handleClick}>ADD</button>
+          <button type="button" id="delete-product-btn" className="btn btn-primary btn-sm" onClick={handleClick}>ADD</button>
 
           <button
             id="delete-product-btn"
@@ -104,7 +110,7 @@ function ProductList() {
         )}
 
         <footer className="footer">
-        <hr className="border border-dark my-4"></hr>
+        <hr className="border border-dark my-4 border-bottom"></hr>
           <p className="footer__p">Scandiweb Test assignment</p>
         </footer>
       </div>

@@ -17,7 +17,7 @@ body {
 .product__buttons {
     display: inline;
     gap: 10px;
-    margin-left: 820px;
+    margin-left: 850px;
 }
 
 .btn-primary {
@@ -32,6 +32,11 @@ body {
 
 .border-dark {
     margin: 8px 40px 0px 40px;
+    color: black;
+}
+
+.border-bottom {
+    margin: 8px 10px 0px 10px;
     color: black;
 }
 

@@ -3,10 +3,16 @@
 	* Database Connection
 	*/
 	class dbConnect {
-		private $server = 'localhost';
-		private $dbname = 'scandiproject';
-		private $user = 'root';
-		private $pass = '';
+		// private $server = 'localhost';
+		// private $dbname = 'scandiproject';
+		// private $user = 'root';
+		// private $pass = '';
+
+		// *for FreeHostingNoAds*
+		private $server = "fdb27.runhosting.com";
+		private $dbname = "4226523_scandiweb";
+		private $user = "4226523_scandiweb";
+		private $pass = "4;40AYP!2pa:pLIK";
 
 		public function connect() {
 			try {
