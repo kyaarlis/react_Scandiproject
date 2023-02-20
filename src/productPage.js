@@ -10,6 +10,7 @@ export default function ProductPage() {
   
   const [formData, setFormData] = useState({})
   
+  const homeUrl = 'https://kyaarlis.github.io/react_ScandiProject/src/PHP/index.php' 
 
     const options = [
       {
@@ -45,14 +46,14 @@ export default function ProductPage() {
     event.preventDefault();
   
     // fetches all sku values from the database
-    axios.get('http://localhost/react_ScandiProject/src/PHP/index.php')
+    axios.get(homeUrl)
       .then(function (response) {
         // checks if the sku value from the form is already present in the database
         if (response.data.some(item => item.sku === formData.sku)) {
           alert('SKU value already exists in the database. Please enter a different SKU value.');
         } else {
           // sends form data to PHP to insert into DB
-          axios.post('http://localhost/react_ScandiProject/src/PHP/index.php', formData)
+          axios.post(homeUrl, formData)
             .then(function (res) {
               console.log(res.data);
               // routes the user to added product page after form is submitted
