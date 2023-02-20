@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react_ScandiProject/static/css/main.267f5e00.css",
+    "main.js": "/react_ScandiProject/static/js/main.86d34ee9.js",
+    "static/js/787.b701888c.chunk.js": "/react_ScandiProject/static/js/787.b701888c.chunk.js",
+    "index.html": "/react_ScandiProject/index.html",
+    "main.267f5e00.css.map": "/react_ScandiProject/static/css/main.267f5e00.css.map",
+    "main.86d34ee9.js.map": "/react_ScandiProject/static/js/main.86d34ee9.js.map",
+    "787.b701888c.chunk.js.map": "/react_ScandiProject/static/js/787.b701888c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.267f5e00.css",
+    "static/js/main.86d34ee9.js"
+  ]
+}
