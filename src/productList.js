@@ -77,8 +77,8 @@ function ProductList() {
             >MASS DELETE
           </button>
         </div>
-        <hr className="border border-dark my-4"></hr>
       </div>
+     <hr className="border border-dark my-6 header-line"></hr>
 
       <div className="product-list">
         {form.map((value, index) =>

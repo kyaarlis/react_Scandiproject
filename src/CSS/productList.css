@@ -5,19 +5,26 @@ body {
 }
 
 .header {
-    display: inline;  
+    display: flex;
+    position: relative; 
 }
 
 .heading {
     display: inline;
     margin-left: 48px;
     font-family: 'Lato', sans-serif;
+    position: absolute;
+    padding-top: 3px;
+    left: 0;
 }
 
 .product__buttons {
     display: inline;
+    position: absolute;
     gap: 10px;
-    margin-left: 850px;
+    right: 0;
+    margin-right: 60px;
+    padding-top: 10px;
 }
 
 .btn-primary {
@@ -30,8 +37,8 @@ body {
     cursor: pointer;
 }
 
-.border-dark {
-    margin: 8px 40px 0px 40px;
+.header-line {
+    margin: 4rem 40px 15px 40px;
     color: black;
 }
 
@@ -54,18 +61,19 @@ form{
 
 @media screen and (max-width: 450px) {
     .header {
-        display: inline;
+        display: flex;
+        /* position: relative;  */
     }
     
     .heading {
         display: inline;
-        margin-left: 20px;
+        margin-left: 10px;
     }
     
     .product__buttons {
         display: inline;
         gap: 20px;
-        margin-left: 10px;
+        margin-left: 10vh;
     }
 
     .header__line {
@@ -79,11 +87,9 @@ form{
     }
 
     .footer {
-        padding-top: 180px;
-        min-height: 100px;
-        margin-left: 100px;
-        
-        display: inline;  
+        padding-top: 50px;
+        min-height: 12vh;
+        display: none; 
     }
 }
 

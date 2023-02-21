@@ -84,7 +84,7 @@ export default function ProductPage() {
 
                       <button type="button" className="btn btn-primary btn-sm" onClick={handleClick}>Cancel</button>
                     </div>
-                    <hr className="border border-dark my-4"></hr>
+                    <hr className="border border-dark my-6 header-line"></hr>
                   </header>
                   
                   <div className='form-container'>
@@ -179,7 +179,7 @@ export default function ProductPage() {
                   </form>
                     
                       <footer className="footer">
-                      <hr className="border border-dark my-4"></hr>
+                      <hr className="border border-dark my-4 footer-border"></hr>
                         <p className="footer__p">Scandiweb Test assignment</p>
                       </footer>
                       
