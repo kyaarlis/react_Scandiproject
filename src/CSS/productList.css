@@ -44,7 +44,7 @@ form{
     margin-top: 20px;
 }
 
-.form-container {
+.product-list {
     margin: 0px 35px 0px 35px;
 }
 
@@ -72,13 +72,25 @@ form{
         margin-top: 8px;
         width: 90%;
     }
+
+    .product-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer {
+        padding-top: 180px;
+        min-height: 100px;
+        margin-left: 100px;
+        
+        display: inline;  
+    }
 }
 
 .footer {
     padding-top: 200px;
     min-height: 100px;
-    display: block;
-    
+    display: block;  
 }
 
 .footer__p {

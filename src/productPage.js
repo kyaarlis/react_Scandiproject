@@ -77,7 +77,7 @@ export default function ProductPage() {
                     id="product_form" 
                     className="product_form"
                     >
-                  <header className="header">
+                  <header className="head">
                     <h2 className="heading">Product Add</h2>
                     <div className="buttons">
                       <button type="submit" id="save-product-button" className="btn btn-primary btn-sm">Save</button> 
@@ -124,10 +124,10 @@ export default function ProductPage() {
                       </div>
                     </div>
             
-                    <div className="product_switcher" id="product_switcher">
+                    <div className="product_switcher" id="productType">
                       <span className="product_switcher-title">Type Switcher</span> 
                     {/* Allows the user to select desired product type */}
-                      <Select name="productType" id="productType"
+                      <Select name="productType" 
                       options={options} 
                       value={selectOption} 
                       onChange={(selected) => 

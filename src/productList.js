@@ -80,7 +80,7 @@ function ProductList() {
         <hr className="border border-dark my-4"></hr>
       </div>
 
-      <div className="form-container">
+      <div className="product-list">
         {form.map((value, index) =>
         <div key={index} className="card-box-order-mine">
         <input className="delete-checkbox" type="checkbox"
@@ -95,7 +95,9 @@ function ProductList() {
                 <p>{value.name}</p>
                 <p>{value.price}.00 $</p>
                 {value.height ? (
-                <p>Dimension: {value.height}x{value.width}x{value.length}</p>
+                <p className="dimensions">
+                  Dimension: {value.height}x{value.width}x{value.length}
+                  </p>
                 ) : value.size ? (
                     <p>Size: {value.size}</p>
                 ) : value.weight ? (
