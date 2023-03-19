@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './CSS/productList.css';
+import { Button, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,7 +40,11 @@ function ProductList() {
   // page routing
   const navigate = useNavigate() 
   function handleClick() {
-    navigate("addproduct")
+    navigate("../addproduct")
+  }
+
+  function handleLogOut() {
+    navigate("/")
   }
 
   // Page title
@@ -47,6 +52,7 @@ function ProductList() {
 
     return (
         <>  
+      
   <div className="page-content" id="pageContent">
 
     <form onSubmit={(e) => {
@@ -63,6 +69,11 @@ function ProductList() {
         console.error(error);
       });
     }}>
+         <Row>
+          <Col>
+          <Button className="mb-2" variant="warning" size="sm" onClick={handleLogOut}>Log Out</Button>
+          </Col>
+        </Row> 
     <div className="header">
         {/* add and delete buttons  */}
         <h2 className="heading">Product List</h2>
@@ -76,6 +87,7 @@ function ProductList() {
             className="btn btn-danger btn-sm"
             >MASS DELETE
           </button>
+          
         </div>
       </div>
      <hr className="border border-dark my-6 header-line"></hr>

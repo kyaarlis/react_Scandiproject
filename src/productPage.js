@@ -38,7 +38,7 @@ export default function ProductPage() {
   const navigate = useNavigate()
 
   function handleClick() {
-    navigate("/")
+    navigate("../products")
   }
 
   // sends form data to PHP to insert into DB

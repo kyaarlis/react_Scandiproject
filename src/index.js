@@ -1,6 +1,8 @@
 import React from 'react';
 import ProductPage from './productPage'
 import ProductList from './productList';
+import LogInPage from './login/LogIn'
+import SignUpPage from './login/SignUp'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from './reportWebVitals';
@@ -11,8 +13,10 @@ export default function App() {
     <>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<ProductList />}/>
+      <Route path="/" element={<LogInPage />}/>
       <Route path='addproduct' element={<ProductPage />} /> 
+      <Route path='products' element={<ProductList />} /> 
+      <Route path='signup' element={<SignUpPage />} /> 
     </Routes>
   </BrowserRouter>
     </>
